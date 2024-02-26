@@ -1,7 +1,7 @@
 import consola from "consola"
 import fs from "fs/promises"
 import path from "path"
-import dts from 'bun-plugin-dts'
+import { dts } from '@anymud/bun-plugin-dts'
 
 try {
     const distPath ='dist'
@@ -14,40 +14,13 @@ try {
     consola.info('Starting build')
     const result = await Bun.build({
         entrypoints: [
-            './src/index.ts',
-            // chain
-            './src/chain/index.ts',
-            './src/chain/async.ts',
-            // iter
-            './src/iter/index.ts',
-            './src/iter/async.ts',
-            './src/browser/index.ts',
-            './src/image/index.ts',
-            './src/nuxt/index.ts',
-            './src/web/index.ts',
-            './src/bits.ts',
-            './src/crypto.ts',
-            './src/date.ts',
-            './src/encoding.ts',
-            './src/enum.ts',
-            './src/event.ts',
-            './src/file.ts',
-            './src/lazy.ts',
-            './src/server.ts',
-            './src/stream.ts',
-            './src/text.ts',
-            './src/types.ts',
-            './src/uri.ts',
-            './src/utils.ts',
+            './src/index.ts'
         ],
         outdir: distPath,
         external: [
-            // 'playwright',
             '*',
         ],
-        plugins: [
-            dts(),
-        ],
+        plugins: [ dts() ],
         root: './src',
     })
     if (result.success) {
